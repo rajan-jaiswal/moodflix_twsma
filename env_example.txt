@@ -1,0 +1,3 @@
+# RapidAPI Configuration
+# The API key is already provided in the code, but you can override it here if needed
+RAPIDAPI_KEY=43774399d4msh623b25b4b75f9d5p1cbae2jsn5b099e5e9e62

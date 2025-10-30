@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎬 MoodFlix - Movie Recommendations Based on Your Mood</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="title">
+                <i class="fas fa-film"></i>
+                MoodFlix
+            </h1>
+            <p class="subtitle">Movie Recommendations Based on Your Mood</p>
+            <p class="subtitle-small">🎬 Hollywood & Bollywood Movies • AI-Powered Recommendations</p>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Input Section -->
+            <section class="input-section">
+                <div class="input-container">
+                    <label for="mood-input" class="input-label">
+                        <i class="fas fa-heart"></i>
+                        How are you feeling today?
+                    </label>
+                    <textarea 
+                        id="mood-input" 
+                        class="mood-input" 
+                        placeholder="Tell us about your mood... (e.g., 'I feel happy and want to watch Bollywood comedy' or 'I'm feeling sad and need uplifting Indian movies')"
+                        rows="3"
+                    ></textarea>
+                    <div class="emoji-row" aria-label="Quick emoji moods">
+                        <button class="emoji-chip" data-emoji="😊" title="Happy">😊</button>
+                        <button class="emoji-chip" data-emoji="😢" title="Sad">😢</button>
+                        <button class="emoji-chip" data-emoji="😠" title="Angry">😠</button>
+                        <button class="emoji-chip" data-emoji="😌" title="Relaxed">😌</button>
+                        <button class="emoji-chip" data-emoji="😴" title="Bored">😴</button>
+                        <button class="emoji-chip" data-emoji="🤩" title="Excited">🤩</button>
+                        <button class="emoji-chip" data-emoji="💕" title="Romantic">💕</button>
+                        <button class="emoji-chip" data-emoji="😨" title="Scared">😨</button>
+                        <button class="emoji-chip" data-emoji="🕵️" title="Mystery">🕵️</button>
+                        <button class="emoji-chip" data-emoji="🚀" title="Sci‑Fi">🚀</button>
+                    </div>
+                    <div class="controls-row">
+                        <div class="preference-group" title="Choose which industry to prioritize">
+                            <select id="preference-select" class="preference-select">
+                                <option value="mixed" selected>Mixed: Hollywood + Bollywood</option>
+                                <option value="indian">Indian Only (Bollywood)</option>
+                                <option value="hollywood">Hollywood Only</option>
+                            </select>
+                            <select id="limit-select" class="limit-select" title="How many movies to show">
+                                <option value="8" selected>8</option>
+                                <option value="10">10</option>
+                                <option value="12">12</option>
+                                <option value="16">16</option>
+                            </select>
+                        </div>
+                        <div class="button-group">
+                            <button id="surprise-btn" class="btn secondary">
+                                <i class="fas fa-wand-magic-sparkles"></i>
+                                Surprise Me
+                            </button>
+                            <button id="find-movies-btn" class="btn primary">
+                                <i class="fas fa-search"></i>
+                                Find Movies 🎥
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Loading Section -->
+            <section id="loading-section" class="loading-section hidden">
+                <div class="loading-spinner">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <p>Analyzing your mood and finding perfect movies...</p>
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <section id="results-section" class="results-section hidden">
+                <div class="mood-display">
+                    <h2 id="mood-title">Your Mood</h2>
+                    <p id="mood-description">Mood description will appear here</p>
+                </div>
+
+                <div class="movies-container">
+                    <h3 class="movies-title">
+                        <i class="fas fa-star"></i>
+                        Recommended Movies
+                    </h3>
+                    <div id="movies-grid" class="movies-grid">
+                        <!-- Movie cards will be dynamically inserted here -->
+                    </div>
+                    <div class="load-more-row">
+                        <button id="load-more-btn" class="btn tertiary hidden">
+                            <i class="fas fa-plus-circle"></i>
+                            Load More
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Error Section -->
+            <section id="error-section" class="error-section hidden">
+                <div class="error-message">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <p id="error-text">Something went wrong. Please try again.</p>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2024 MoodFlix. Powered by sentiment analysis and TMDB API.</p>
+        </footer>
+    </div>
+
+    <!-- Modal -->
+    <div id="movie-modal" class="modal hidden">
+        <div class="modal-content">
+            <button id="modal-close" class="modal-close" aria-label="Close"><i class="fas fa-times"></i></button>
+            <div id="modal-body"></div>
+        </div>
+        <div class="modal-backdrop"></div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
